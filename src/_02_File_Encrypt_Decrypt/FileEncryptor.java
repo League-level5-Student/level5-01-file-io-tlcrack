@@ -31,21 +31,22 @@ public class FileEncryptor {
 		key = Integer.parseInt(JOptionPane.showInputDialog("Enter an integer to encrypt your message. (e.g. 4)"));
 		String zep = "";
 		int newChar = 0;
-
+		zep += key;
+		zep += " ";
 		for (int i = 0; i < val.length(); i++) {
 			char iChar = val.charAt(i);
 			if (Character.isAlphabetic(iChar)) {
 				if (Character.isLowerCase(iChar)) {
 					newChar = iChar + key;
 
-					if (iChar + key > 122) {
+					while (newChar > 122) {
 						newChar -= 26;
 					}
 				}
 				if (Character.isUpperCase(iChar)) {
 					newChar = iChar + key;
 
-					if (iChar + key > 90) {
+					while (newChar > 90) {
 						newChar -= 26;
 					}
 				}
@@ -55,7 +56,7 @@ public class FileEncryptor {
 				zep += iChar;
 			}
 		}
-		System.out.println(zep);
+		
 		
 		FileWriter fw;
 		try {
