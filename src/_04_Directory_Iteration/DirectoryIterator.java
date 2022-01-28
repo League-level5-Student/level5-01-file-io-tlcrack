@@ -10,6 +10,9 @@ public class DirectoryIterator {
 		 * The following is an example of how to list all of the files in a directory.
 		 * Once the program is running, the directory is chosen using the JFileChooser.
 		 */
+		
+		
+		/*
 		JFileChooser jfc = new JFileChooser();
 		jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		int returnVal = jfc.showOpenDialog(null);
@@ -22,7 +25,8 @@ public class DirectoryIterator {
 				}
 			}
 		}
-
+		*/
+		
 		/*
 		 * Your task is to write a program that iterates through the src folder of this
 		 * current Java Project. For every .java file it finds, the program will add a
@@ -30,5 +34,28 @@ public class DirectoryIterator {
 		 * directories inside of directories. (e.g //Copyright © 2019 FirstName
 		 * LastName)
 		 */
+		
+		
+		JFileChooser srcIterator = new JFileChooser();
+		srcIterator.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		int returnValue = srcIterator.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File directory = srcIterator.getSelectedFile();
+			File[] files = directory.listFiles();
+			findFiles(files);
+		}
+		
 	}
+	
+	static void findFiles(File[] files) {
+		if (files != null) {
+			for (File f : files) {
+				System.out.println(f.getAbsolutePath());
+				if(f.listFiles()!=null) {
+					findFiles(f.listFiles());
+				}
+			}
+		}
+	}
+	
 }
